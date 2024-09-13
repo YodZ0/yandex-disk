@@ -9,6 +9,7 @@ class RunConfig(BaseModel):
 
 class ApiV1Prefix(BaseModel):
     prefix: str = '/v1'
+    auth: str = '/auth'
 
 
 class ApiPrefix(BaseModel):
