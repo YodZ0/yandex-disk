@@ -1,5 +1,5 @@
-from src.core.http_client import YandexClient
 from src.core.config import settings
+from src.services import YandexClient
 
 
 async def get_yandex_client(token: str) -> YandexClient:

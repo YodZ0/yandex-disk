@@ -1,5 +1,3 @@
-__all__ = (
-    'AuthService',
-)
+__all__ = ("YandexClient",)
 
-from .auth import AuthService
+from .http_client import YandexClient
