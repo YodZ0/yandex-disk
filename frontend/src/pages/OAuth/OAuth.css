@@ -1,0 +1,29 @@
+/* Основной контейнер страницы OAuth */
+.oauth-page {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+/* Заголовок страницы OAuth */
+.oauth-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0px;
+}
+
+/* Стили для ссылки */
+.small-link {
+    display: block;
+    font-size: 0.9rem;
+    color: #981cf7;
+    text-decoration: none;
+}
+
+.small-link:hover {
+    text-decoration: underline;
+}
