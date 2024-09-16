@@ -1,18 +1,43 @@
 .button {
-    padding: 0.8rem 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0.6rem;
+    background-color: var(--primary-color);
+    color: #fff;
+    font-weight: bold;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     transition: all;
-    font-weight: bold;
-    background: #981cf7;
-    color: #fff;
+    position: relative;
 }
 
 .button:hover {
-    opacity: 0.8;
+    background: var(--accent-color);
 }
 
 .button:active {
-    background: #f47f19;
+    background: var(--primary-color);
+    opacity: 0.8;
+}
+
+.button-children {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.button-children svg {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.file-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
 }
