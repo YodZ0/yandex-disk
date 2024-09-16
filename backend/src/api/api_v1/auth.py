@@ -42,3 +42,17 @@ async def set_cookie(
     except Exception as e:
         print(e)
         return {"status": "500", "message": "error"}
+
+
+@router.get("/clear")
+async def clear_cookie(
+    response: Response,
+):
+    try:
+        response.delete_cookie(
+            key="oauth_token",
+        )
+        return {"status": "200", "message": "success"}
+    except Exception as e:
+        print(e)
+        return {"status": "500", "message": "error"}
