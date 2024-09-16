@@ -1,0 +1,39 @@
+.label {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 100%;
+}
+
+.label text {
+    margin-bottom: 0.8rem;
+}
+
+.label.top {
+    flex-direction: column;
+}
+
+.label.left {
+    flex-direction: row;
+    white-space: nowrap;
+}
+
+.label.right {
+    flex-direction: row-reverse;
+    white-space: nowrap;
+}
+
+.label.top input {
+    margin-top: 5px;
+}
+
+.label.left input {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.label.right input {
+    margin-left: 10px;
+    margin-right: 10px;
+}
