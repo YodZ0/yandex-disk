@@ -1,6 +1,6 @@
 from aiohttp import ClientSession
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Response
 from pydantic import BaseModel
 
 from src.core.config import settings
@@ -24,3 +24,21 @@ async def validate_token(token: OAuthToken):
         ) as response:
             res = await response.json()
             return res
+
+
+@router.post("/set")
+async def set_cookie(
+    token: OAuthToken,
+    response: Response,
+):
+    try:
+        response.set_cookie(
+            key="oauth_token",
+            value=token.token,
+            samesite="none",
+            secure=True,
+        )
+        return {"status": "200", "message": "success"}
+    except Exception as e:
+        print(e)
+        return {"status": "500", "message": "error"}
