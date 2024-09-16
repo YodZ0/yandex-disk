@@ -1,4 +1,7 @@
 import { useState } from 'react';
+
+import { SlKey } from "react-icons/sl";
+
 import API from '../../services/api.jsx';
 
 import Button from '../Button/Button.jsx';
@@ -14,8 +17,7 @@ export default function OAuthForm({ onTokenValidated }) {
     async function validateToken(event) {
         event.preventDefault();
         try {
-            // const response = await API.post('/v1/auth/validate', { token });
-            const response = await API.post('/v1/test/validate', { token });
+            const response = await API.post('/v1/auth/validate', { token });
             if (response.data && response.data.user) {
                 const user = response.data.user;
                 setResponseMessage(
@@ -48,7 +50,7 @@ export default function OAuthForm({ onTokenValidated }) {
                         onChange={(e) => setToken(e.target.value)}
                     />
                 </Label>
-                <Button title="Validate" />
+                <Button title="Validate" icon={<SlKey />} type='submit' />
             </form>
             {responseMessage && <div className="response-message">{responseMessage}</div>}
         </div>
