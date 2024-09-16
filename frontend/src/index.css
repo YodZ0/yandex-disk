@@ -1,4 +1,9 @@
 :root {
+  --primary-color: #981cf7;
+  --primary-color-transparent: #b14affb7;
+  --accent-color: #f47f19;
+  --bg-color-grey: #efefef;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
 }
@@ -7,9 +12,8 @@ body {
   margin: 0;
 }
 
-/* Стили для основного контейнера */
 main {
-  background-color: #f4f4f4;
+  background-color: var(--bg-color-grey);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -18,7 +22,6 @@ main {
   box-sizing: border-box;
 }
 
-/* Стили для шапки */
 .header {
   font-size: 1rem;
   font-weight: bold;
@@ -31,7 +34,6 @@ main {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Стили для контейнера с контентом */
 .container {
   background-color: #fff;
   padding: 20px;
