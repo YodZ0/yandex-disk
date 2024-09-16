@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { SlLogin } from "react-icons/sl";
+
 import API from '../../services/api.jsx';
 
 import OAuthForm from '../../components/OAuthForm/OAuthForm.jsx';
@@ -20,14 +22,16 @@ export default function OAuth() {
     }
 
     async function handleLogin() {
-        console.log('Token to be saved:', token);
-        // Запрос на сохранение токена в cookie
-        const response = await API.post('/v1/test/set', {token: token}, {withCredentials: true});
-        if (response.data && response.data.status==="200") {
-            navigate('/content');
-        } else {
-            console.log('Error')
+        if (window.confirm('Accept cookie?')) {
+            // Запрос на сохранение токена в cookie
+            const response = await API.post('/v1/auth/set', { token: token }, { withCredentials: true });
+            if (response.data && response.data.status === "200") {
+                navigate('/content');
+            } else {
+                console.log('Error')
+            }
         }
+
     }
 
     return (
@@ -42,7 +46,7 @@ export default function OAuth() {
             </a>
             <OAuthForm onTokenValidated={handleTokenValidation} />
             {isTokenValid && (
-                <Button title="Login" onClick={handleLogin} />
+                <Button title="Login" icon={<SlLogin />} onClick={handleLogin} />
             )}
         </div>
     );
