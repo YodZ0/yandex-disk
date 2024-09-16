@@ -19,7 +19,6 @@ class ApiPrefix(BaseModel):
 
 class YandexClient(BaseModel):
     base_url: str = "https://cloud-api.yandex.net"
-    client_id: str
 
 
 class Settings(BaseSettings):
@@ -31,7 +30,7 @@ class Settings(BaseSettings):
     )
     run: RunConfig = RunConfig()
     api: ApiPrefix = ApiPrefix()
-    yandex_client: YandexClient
+    yandex_client: YandexClient = YandexClient()
 
 
 settings = Settings()
