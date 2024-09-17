@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { SlLogin } from "react-icons/sl";
 
 import API from '../../services/api.jsx';
+import { useAuth } from '../../OAuthContext.jsx';
 
 import OAuthForm from '../../components/OAuthForm/OAuthForm.jsx';
 import Button from '../../components/Button/Button.jsx';
@@ -11,6 +12,7 @@ import Button from '../../components/Button/Button.jsx';
 import './OAuth.css';
 
 export default function OAuth() {
+    const { login } = useAuth();
     const navigate = useNavigate();
 
     const [isTokenValid, setIsTokenValid] = useState(false);
@@ -23,9 +25,9 @@ export default function OAuth() {
 
     async function handleLogin() {
         if (window.confirm('Accept cookie?')) {
-            // Запрос на сохранение токена в cookie
             const response = await API.post('/v1/auth/set', { token: token }, { withCredentials: true });
             if (response.data && response.data.status === "200") {
+                login();
                 navigate('/content');
             } else {
                 console.log('Error')
@@ -50,4 +52,4 @@ export default function OAuth() {
             )}
         </div>
     );
-}
+};

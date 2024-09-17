@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { SlLogout } from 'react-icons/sl';
 
 import API from '../../services/api.jsx';
+import { useAuth } from '../../OAuthContext.jsx';
 
 import Input from '../../components/Input/Input.jsx';
 import Button from '../../components/Button/Button.jsx';
@@ -15,8 +16,9 @@ import './Content.css';
 export default function Content() {
   const [isEmpty, setEmpty] = useState(true);
   const [public_key, setPublicKey] = useState('');
-
   const [contentData, setContentData] = useState([]);
+
+  const { isLogged, logout } = useAuth();
 
   async function fetchData(event) {
     event.preventDefault();
@@ -39,6 +41,7 @@ export default function Content() {
   return (
     <div className="content-page">
       <div className="content-header">
+        <Button title="Logout" icon={<SlLogout />} onClick={logout} />
         <h1 className="content-title">Данные диска</h1>
       </div>
       <Label position='left'>
