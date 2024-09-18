@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from src.core.config import settings
+from backend.src.core.config import settings
 
 from .auth import router as auth_router
 from .disk import router as disk_router

@@ -1,7 +1,7 @@
 from fastapi import Request, HTTPException
 
-from src.core.config import settings
-from src.services import YandexClient
+from backend.src.core.config import settings
+from backend.src.services import YandexClient
 
 
 async def get_yandex_client(request: Request) -> YandexClient:

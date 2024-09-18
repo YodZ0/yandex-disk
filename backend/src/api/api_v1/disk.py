@@ -3,11 +3,11 @@ from typing import TYPE_CHECKING, Annotated
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
-from src.core.config import settings
+from backend.src.core.config import settings
 from .deps import get_yandex_client
 
 if TYPE_CHECKING:
-    from src.services import YandexClient
+    from backend.src.services import YandexClient
 
 
 router = APIRouter(prefix=settings.api.v1.disk, tags=["Disk"])
