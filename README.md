@@ -3,7 +3,7 @@
 
 ### Installation:
 1. Clone project
-2. Run "run.bat" from project directory
+2. Run "./run.bat" from project directory (with admin access)
 
 ### App usage:
 1. Follow [Swagger documentation](http://127.0.0.1:8000/docs) to view the API documentation

@@ -44,7 +44,7 @@ IF ERRORLEVEL 1 (
   EXIT /B 1
 )
 
-:: Проверка, что сервер backend запущен
+:: Check if backend is running
 :CHECK_BACKEND
 ECHO Checking if backend is up...
 curl -s http://127.0.0.1:8000 > NUL
@@ -101,9 +101,20 @@ IF ERRORLEVEL 1 (
   ECHO Failed to start the frontend application. Exiting...
   EXIT /B 1
 )
+
+:: Check if frontend is running
+:CHECK_FRONTEND
+ECHO Checking if frontend is up...
+curl -s http://localhost:5173 > NUL
+IF %ERRORLEVEL% NEQ 0 (
+    ECHO Frontend is not up yet. Retrying...
+    TIMEOUT /T 5 > NUL
+    GOTO CHECK_FRONTEND
+)
+ECHO Frontend is up and running!
 :: =========================== FRONTEND APP PART END ===========================
 
-:: Цикл ожидания и проверки флага
+:: Check flag
 :WAIT
 TIMEOUT /T 10 > NUL
 IF EXIST "%~dp0stop.flag" (
