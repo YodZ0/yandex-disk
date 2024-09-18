@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Annotated
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
-from backend.src.core.config import settings
+from src.core.config import settings
 from .deps import get_yandex_client
 
 if TYPE_CHECKING:

@@ -3,7 +3,7 @@ from aiohttp import ClientSession
 from fastapi import APIRouter, Response
 from pydantic import BaseModel
 
-from backend.src.core.config import settings
+from src.core.config import settings
 
 router = APIRouter(prefix=settings.api.v1.auth, tags=["Auth"])
 

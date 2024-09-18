@@ -1,11 +1,11 @@
 @ECHO OFF
+SETLOCAL ENABLEDELAYEDEXPANSION
 
 :: =========================== BACKEND APP PART START ===========================
 ECHO === STARTING BACKEND APP ===
-:: Go to backend dir
 CD backend
 
-:: Check if venv exist
+:: Check if venv exists and activate it
 IF EXIST "venv/Scripts/activate" (
   ECHO Activating virtual environment...
   CALL venv/Scripts/activate
@@ -38,16 +38,26 @@ SET PYTHONPATH=%CD%
 
 :: Starting backend app
 ECHO Starting backend app...
-python src/main.py
+START "" /B python src/main.py
 IF ERRORLEVEL 1 (
   ECHO Failed to start the backend application. Exiting...
   EXIT /B 1
 )
+
+:: Проверка, что сервер backend запущен
+:CHECK_BACKEND
+ECHO Checking if backend is up...
+curl -s http://127.0.0.1:8000 > NUL
+IF %ERRORLEVEL% NEQ 0 (
+    ECHO Backend is not up yet. Retrying...
+    TIMEOUT /T 5 > NUL
+    GOTO CHECK_BACKEND
+)
+ECHO Backend is up and running!
 :: =========================== BACKEND APP PART END ===========================
 
-:: =========================== FRONTED APP PART START ===========================
+:: =========================== FRONTEND APP PART START ===========================
 ECHO === STARTING FRONTEND APP ===
-:: Go to frontend dir
 CD ../frontend
 
 :: Check for Node.js
@@ -73,7 +83,7 @@ IF %ERRORLEVEL% NEQ 0 (
 :: Check package.json
 IF EXIST "package.json" (
   ECHO Installing frontend dependencies...
-  npm install
+  START "" /B npm install
   IF %ERRORLEVEL% NEQ 0 (
     ECHO Failed to install frontend dependencies. Exiting...
     EXIT /B 1
@@ -86,12 +96,21 @@ IF EXIST "package.json" (
 
 :: Starting frontend app
 ECHO Starting frontend app...
-npm run dev
-IF %ERRORLEVEL% NEQ 0 (
+START "" /B npm run dev
+IF ERRORLEVEL 1 (
   ECHO Failed to start the frontend application. Exiting...
   EXIT /B 1
 )
-:: =========================== FRONTED APP PART END ===========================
+:: =========================== FRONTEND APP PART END ===========================
 
-PAUSE
-EXIT /B 1
+:: Цикл ожидания и проверки флага
+:WAIT
+TIMEOUT /T 10 > NUL
+IF EXIST "%~dp0stop.flag" (
+    ECHO Stopping the backend and frontend...
+    TASKKILL /IM python.exe /F
+    TASKKILL /IM node.exe /F
+    DEL "%~dp0stop.flag"
+    EXIT /B 0
+)
+GOTO WAIT
