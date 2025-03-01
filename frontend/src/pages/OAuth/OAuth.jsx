@@ -42,7 +42,7 @@ export default function OAuth() {
             <a
                 className="small-link"
                 target='_blank'
-                href="https://oauth.yandex.ru/authorize?response_type=token&client_id=8b473093d78c4c6099fad6ddbb3f12df"
+                href="https://oauth.yandex.ru/authorize?response_type=token&client_id=abcdefghijklmnopqrstu"
             >
                 Get token
             </a>
